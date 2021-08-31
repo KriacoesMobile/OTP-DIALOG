@@ -5,24 +5,26 @@ import 'package:flutter/material.dart';
 
 class OTPDialog extends StatefulWidget {
 
-  String? title;
-  String? description;
+  String title;
+  String description;
   String? resendCodeText;
-  String? buttonText;
-  TextStyle? titleStyle;
-  TextStyle? descriptionStyle;
-  TextStyle? resendCodeStyle;
+  String buttonText;
+  TextStyle titleStyle;
+  TextStyle descriptionStyle;
+  TextStyle resendCodeStyle;
   Color buttonColor;
 
   OTPDialog({
-    this.title,
-    this.description,
+    required this.title,
+    required this.description,
     this.resendCodeText,
-    this.buttonText,
-    this.titleStyle,
-    this.descriptionStyle,
+    this.buttonText = "Confirmer",
+    this.titleStyle = const TextStyle(
+      fontWeight: FontWeight.bold
+    ),
+    this.descriptionStyle = const TextStyle(),
     this.buttonColor = Colors.blue,
-    this.resendCodeStyle
+    this.resendCodeStyle = const TextStyle()
   });
 
   @override
