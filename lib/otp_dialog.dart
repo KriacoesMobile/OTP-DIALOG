@@ -2,6 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OTPDialog extends StatefulWidget {
+
+  String? title;
+  String? description;
+  String? resendCodeText;
+  String? buttonText;
+
   @override
   _OTPDialogState createState() => _OTPDialogState();
 
@@ -22,7 +28,7 @@ class _OTPDialogState extends State<OTPDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 300,
       width: 400,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(20)),
@@ -51,6 +57,12 @@ class _OTPDialogState extends State<OTPDialog> {
             SizedBox(
               height: 20,
             ),
+            Container(
+              width: 100,
+              child: ElevatedButton(onPressed: (){}, child: Text("Verify"))),
+            SizedBox(
+              height: 20,
+            ),
             Text("Renvoyer le code",style: TextStyle(
               decoration: TextDecoration.underline
             ),)
@@ -74,7 +86,9 @@ class _OTPDialogState extends State<OTPDialog> {
               width: 1,
               color: Colors.grey
             )
-          ),child: CupertinoTextField()));
+          ),child: CupertinoTextField(
+            textAlign: TextAlign.center,
+          )));
     }
     return inputFields;
   }
