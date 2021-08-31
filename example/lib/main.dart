@@ -25,7 +25,10 @@ class TestApp extends StatelessWidget {
       child: Center(
         child: ElevatedButton(
           onPressed: () {
-            OTPDialog().show(context);
+            OTPDialog(
+              title: "",
+              description: "",
+            ).show(context);
           },
           child: Text("Click"),
         ),
