@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,21 @@ class OTPDialog extends StatefulWidget {
   String? description;
   String? resendCodeText;
   String? buttonText;
+  TextStyle? titleStyle;
+  TextStyle? descriptionStyle;
+  TextStyle? resendCodeStyle;
+  Color buttonColor;
+
+  OTPDialog({
+    this.title,
+    this.description,
+    this.resendCodeText,
+    this.buttonText,
+    this.titleStyle,
+    this.descriptionStyle,
+    this.buttonColor = Colors.blue,
+    this.resendCodeStyle
+  });
 
   @override
   _OTPDialogState createState() => _OTPDialogState();
