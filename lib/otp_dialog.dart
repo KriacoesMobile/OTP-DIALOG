@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OTPDialog extends StatefulWidget {
-
   String title;
   String description;
   String? resendCodeText;
@@ -14,18 +13,15 @@ class OTPDialog extends StatefulWidget {
   TextStyle resendCodeStyle;
   Color buttonColor;
 
-  OTPDialog({
-    required this.title,
-    required this.description,
-    this.resendCodeText,
-    this.buttonText = "Confirmer",
-    this.titleStyle = const TextStyle(
-      fontWeight: FontWeight.bold
-    ),
-    this.descriptionStyle = const TextStyle(),
-    this.buttonColor = Colors.blue,
-    this.resendCodeStyle = const TextStyle()
-  });
+  OTPDialog(
+      {required this.title,
+      required this.description,
+      this.resendCodeText,
+      this.buttonText = "Confirmer",
+      this.titleStyle = const TextStyle(fontWeight: FontWeight.bold),
+      this.descriptionStyle = const TextStyle(),
+      this.buttonColor = Colors.blue,
+      this.resendCodeStyle = const TextStyle()});
 
   @override
   _OTPDialogState createState() => _OTPDialogState();
@@ -57,15 +53,13 @@ class _OTPDialogState extends State<OTPDialog> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Authentification doube facteur",
+              this.widget.title,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 10,
             ),
-            Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                textAlign: TextAlign.center),
+            Text(this.widget.description, textAlign: TextAlign.center),
             SizedBox(
               height: 20,
             ),
@@ -77,14 +71,15 @@ class _OTPDialogState extends State<OTPDialog> {
               height: 20,
             ),
             Container(
-              width: 100,
-              child: ElevatedButton(onPressed: (){}, child: Text("Verify"))),
+                width: 100,
+                child: ElevatedButton(onPressed: () {}, child: Text("Verify"))),
             SizedBox(
               height: 20,
             ),
-            Text("Renvoyer le code",style: TextStyle(
-              decoration: TextDecoration.underline
-            ),)
+            this.widget.resendCodeText != null
+                ? Text(this.widget.resendCodeText!,
+                    style: TextStyle(decoration: TextDecoration.underline))
+                : Container()
           ],
         ),
       ),
@@ -99,13 +94,12 @@ class _OTPDialogState extends State<OTPDialog> {
           width: 10,
         ));
       }
-      inputFields
-          .add(Container(width: 40, height: 40, decoration: BoxDecoration(
-            border: Border.all(
-              width: 1,
-              color: Colors.grey
-            )
-          ),child: CupertinoTextField(
+      inputFields.add(Container(
+          width: 40,
+          height: 40,
+          decoration:
+              BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
+          child: CupertinoTextField(
             textAlign: TextAlign.center,
           )));
     }
