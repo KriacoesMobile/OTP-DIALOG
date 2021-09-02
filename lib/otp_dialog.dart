@@ -4,22 +4,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OTPDialog extends StatefulWidget {
-  String title;
-  String description;
-  String resendCodeText;
-  String buttonText;
-  TextStyle titleStyle;
-  TextStyle descriptionStyle;
-  TextStyle resendCodeStyle;
-  Color buttonColor;
-  int codeLength;
-  bool displayResendCodeText;
-  Function? onResendCodePressed;
-  bool displayButton;
-  bool dismissable;
-  Function? onButtonPressed;
-  Function? onLastInputChanged;
-  TextInputType inputType;
+  final String title;
+  final String description;
+  final String resendCodeText;
+  final String buttonText;
+  final TextStyle titleStyle;
+  final TextStyle descriptionStyle;
+  final TextStyle resendCodeStyle;
+  final Color buttonColor;
+  final int codeLength;
+  final bool displayResendCodeText;
+  final Function? onResendCodePressed;
+  final bool displayButton;
+  final bool dismissable;
+  final Function? onButtonPressed;
+  final Function? onLastInputChanged;
+  final TextInputType inputType;
 
   OTPDialog(
       {required this.title,
