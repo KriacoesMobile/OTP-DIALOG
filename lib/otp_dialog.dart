@@ -20,6 +20,7 @@ class OTPDialog extends StatefulWidget {
   final Function? onButtonPressed;
   final Function? onLastInputChanged;
   final TextInputType inputType;
+  final Color barrierColor;
 
   OTPDialog(
       {required this.title,
@@ -37,7 +38,8 @@ class OTPDialog extends StatefulWidget {
       this.onButtonPressed,
       this.dismissable = false,
       this.onLastInputChanged,
-      this.inputType = TextInputType.number});
+      this.inputType = TextInputType.number,
+      this.barrierColor = Colors.transparent});
 
   @override
   _OTPDialogState createState() => _OTPDialogState();
@@ -45,6 +47,7 @@ class OTPDialog extends StatefulWidget {
   show(context) {
     return showDialog(
       context: context,
+      barrierDismissible: this.dismissable,
       builder: (context) {
         return AlertDialog(
           content: this,
@@ -83,17 +86,25 @@ class _OTPDialogState extends State<OTPDialog> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: _renderOTPInputFields(5),
             ),
+            Visibility(
+              visible: this.widget.displayButton,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      width: 100,
+                      child: ElevatedButton(
+                          onPressed: () {}, child: Text("Verify"))),
+                ],
+              ),
+            ),
             SizedBox(
               height: 20,
             ),
-            Container(
-                width: 100,
-                child: ElevatedButton(onPressed: () {}, child: Text("Verify"))),
-            SizedBox(
-              height: 20,
-            ),
-            this.widget.resendCodeText != null
-                ? Text(this.widget.resendCodeText!,
+            this.widget.displayResendCodeText
+                ? Text(this.widget.resendCodeText,
                     style: TextStyle(decoration: TextDecoration.underline))
                 : Container()
           ],
