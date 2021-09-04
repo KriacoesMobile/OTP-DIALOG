@@ -26,8 +26,8 @@ class TestApp extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             OTPDialog(
-              title: "",
-              description: "",
+              title: "Code verification",
+              description: "Enter the code that you received on your phone",
             ).show(context);
           },
           child: Text("Click"),

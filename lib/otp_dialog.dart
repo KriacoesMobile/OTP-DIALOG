@@ -25,7 +25,7 @@ class OTPDialog extends StatefulWidget {
   OTPDialog(
       {required this.title,
       required this.description,
-      this.resendCodeText = "",
+      this.resendCodeText = "Resend the code",
       this.buttonText = "Confirmer",
       this.titleStyle = const TextStyle(fontWeight: FontWeight.bold),
       this.descriptionStyle = const TextStyle(),
