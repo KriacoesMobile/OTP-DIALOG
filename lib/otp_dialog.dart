@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_dialog/otp_input_field.dart';
@@ -25,7 +24,7 @@ class OTPDialog extends StatefulWidget {
   final Color? barrierColor;
   final bool obscureText;
   final BoxDecoration? inputDecoration;
-  final double height;
+  final double? height;
 
   OTPDialog(
       {required this.title,
@@ -47,7 +46,7 @@ class OTPDialog extends StatefulWidget {
       this.barrierColor = Colors.transparent,
       this.obscureText = false,
       this.inputDecoration,
-      this.height = 300});
+      this.height});
 
   @override
   _OTPDialogState createState() => _OTPDialogState();
@@ -71,7 +70,9 @@ class _OTPDialogState extends State<OTPDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: this.widget.height,
+      height: this.widget.height == null
+          ? MediaQuery.of(context).size.height * 0.4
+          : this.widget.height,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(20)),
@@ -85,11 +86,11 @@ class _OTPDialogState extends State<OTPDialog> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(
-              height: 10,
+              height: MediaQuery.of(context).size.height * 0.02,
             ),
             Text(this.widget.description, textAlign: TextAlign.center),
             SizedBox(
-              height: 20,
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +101,7 @@ class _OTPDialogState extends State<OTPDialog> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.03,
                   ),
                   Container(
                       width: 100,
@@ -110,7 +111,7 @@ class _OTPDialogState extends State<OTPDialog> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
             this.widget.displayResendCodeText
                 ? Text(this.widget.resendCodeText,
@@ -127,7 +128,7 @@ class _OTPDialogState extends State<OTPDialog> {
     for (var i = 0; i < inputFieldsCount; i++) {
       if (i != 0) {
         inputFields.add(SizedBox(
-          width: 10,
+          width: MediaQuery.of(context).size.width * 0.04,
         ));
       }
       inputFields.add(OTPInputField(
