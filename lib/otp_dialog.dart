@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:otp_dialog/otp_input_field.dart';
+import 'package:otp_dialog/resources/constants.dart';
 
 class OTPDialog extends StatefulWidget {
   final String title;
@@ -21,17 +23,18 @@ class OTPDialog extends StatefulWidget {
   final Function? onLastInputChanged;
   final TextInputType inputType;
   final Color barrierColor;
+  final bool obscureText;
 
   OTPDialog(
       {required this.title,
       required this.description,
-      this.resendCodeText = "Resend the code",
-      this.buttonText = "Confirmer",
+      this.resendCodeText = RESEND_CODE_DEFAULT_LABEL,
+      this.buttonText = DEFAULT_BUTTON_LABEL,
       this.titleStyle = const TextStyle(fontWeight: FontWeight.bold),
       this.descriptionStyle = const TextStyle(),
       this.buttonColor = Colors.blue,
       this.resendCodeStyle = const TextStyle(),
-      this.codeLength = 5,
+      this.codeLength = DEFAULT_OTP_LENGTH,
       this.displayResendCodeText = true,
       this.displayButton = true,
       this.onResendCodePressed,
@@ -39,7 +42,8 @@ class OTPDialog extends StatefulWidget {
       this.dismissable = false,
       this.onLastInputChanged,
       this.inputType = TextInputType.number,
-      this.barrierColor = Colors.transparent});
+      this.barrierColor = Colors.transparent,
+      this.obscureText = false});
 
   @override
   _OTPDialogState createState() => _OTPDialogState();
@@ -121,14 +125,7 @@ class _OTPDialogState extends State<OTPDialog> {
           width: 10,
         ));
       }
-      inputFields.add(Container(
-          width: 40,
-          height: 40,
-          decoration:
-              BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
-          child: CupertinoTextField(
-            textAlign: TextAlign.center,
-          )));
+      inputFields.add(OTPInputField());
     }
     return inputFields;
   }
