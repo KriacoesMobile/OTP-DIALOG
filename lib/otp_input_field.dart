@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:otp_dialog/resources/constants.dart';
 
 class OTPInputField extends StatelessWidget {
-  const OTPInputField({ Key? key }) : super(key: key);
+  final BoxDecoration? inputDecoration;
+
+  OTPInputField({this.inputDecoration});
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +13,9 @@ class OTPInputField extends StatelessWidget {
       width: 40,
       height: 40,
       child: CupertinoTextField(
-        decoration:
-              BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
+        decoration: this.inputDecoration == null
+            ? DEFAULT_INPUT_DECORATION
+            : this.inputDecoration,
         textAlign: TextAlign.center,
       ),
     );
