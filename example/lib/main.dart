@@ -28,6 +28,7 @@ class TestApp extends StatelessWidget {
             OTPDialog(
               title: "Code verification",
               description: "Enter the code that you received on your phone",
+              obscureText: true,
             ).show(context);
           },
           child: Text("Click"),

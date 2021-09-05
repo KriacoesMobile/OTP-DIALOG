@@ -26,6 +26,7 @@ class OTPDialog extends StatefulWidget {
   final bool obscureText;
   final BoxDecoration? inputDecoration;
   final double? height;
+  final double? buttonSize;
 
   OTPDialog(
       {required this.title,
@@ -47,7 +48,8 @@ class OTPDialog extends StatefulWidget {
       this.barrierColor = Colors.transparent,
       this.obscureText = false,
       this.inputDecoration,
-      this.height});
+      this.height,
+      this.buttonSize});
 
   @override
   _OTPDialogState createState() => _OTPDialogState();
@@ -105,7 +107,9 @@ class _OTPDialogState extends State<OTPDialog> {
                     height: MediaQuery.of(context).size.height * PADDING_20,
                   ),
                   Container(
-                      width: 100,
+                      width: this.widget.buttonSize == null
+                          ? MediaQuery.of(context).size.width * BUTTON_SIZE
+                          : this.widget.buttonSize,
                       child: ElevatedButton(
                           onPressed: () {},
                           child: Text(this.widget.buttonText))),
@@ -135,6 +139,7 @@ class _OTPDialogState extends State<OTPDialog> {
       }
       inputFields.add(OTPInputField(
         inputDecoration: this.widget.inputDecoration,
+        obscureText: this.widget.obscureText,
       ));
     }
     return inputFields;
