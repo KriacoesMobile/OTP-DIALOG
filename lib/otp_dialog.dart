@@ -70,6 +70,18 @@ class OTPDialog extends StatefulWidget {
 }
 
 class _OTPDialogState extends State<OTPDialog> {
+  List<TextEditingController> textControllers = [];
+  List<FocusNode> listFocusNode = [];
+
+  @override
+  void initState() {
+    super.initState();
+    for (var i = 0; i < this.widget.codeLength; i++) {
+      textControllers.add(TextEditingController());
+      listFocusNode.add(FocusNode());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -95,9 +107,13 @@ class _OTPDialogState extends State<OTPDialog> {
             SizedBox(
               height: MediaQuery.of(context).size.height * PADDING_20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: _renderOTPInputFields(5),
+            Container(
+              height: MediaQuery.of(context).size.width * INPUT_SIZE,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                children: _renderOTPInputFields(),
+              ),
             ),
             Visibility(
               visible: this.widget.displayButton,
@@ -129,9 +145,9 @@ class _OTPDialogState extends State<OTPDialog> {
     );
   }
 
-  _renderOTPInputFields(int inputFieldsCount) {
+  _renderOTPInputFields() {
     List<Widget> inputFields = [];
-    for (var index = 0; index < inputFieldsCount; index++) {
+    for (var index = 0; index < this.widget.codeLength; index++) {
       if (index != 0) {
         inputFields.add(SizedBox(
           width: MediaQuery.of(context).size.width * PADDING_20,
@@ -140,6 +156,19 @@ class _OTPDialogState extends State<OTPDialog> {
       inputFields.add(OTPInputField(
         inputDecoration: this.widget.inputDecoration,
         obscureText: this.widget.obscureText,
+        textController: textControllers[index],
+        focusNode: listFocusNode[index],
+        onChange: (value) {
+          if (value.isEmpty) {
+            if (index > 0) {
+              listFocusNode[index - 1].requestFocus();
+            }
+          } else {
+            if (index < this.widget.codeLength - 1) {
+              listFocusNode[index + 1].requestFocus();
+            }
+          }
+        },
       ));
     }
     return inputFields;
