@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_dialog/otp_input_field.dart';
 import 'package:otp_dialog/resources/constants.dart';
+import 'package:otp_dialog/resources/dimens.dart';
 
 class OTPDialog extends StatefulWidget {
   final String title;
@@ -71,7 +72,7 @@ class _OTPDialogState extends State<OTPDialog> {
   Widget build(BuildContext context) {
     return Container(
       height: this.widget.height == null
-          ? MediaQuery.of(context).size.height * 0.4
+          ? MediaQuery.of(context).size.height * DEFAULT_HEIGHT_SIZE
           : this.widget.height,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -86,11 +87,11 @@ class _OTPDialogState extends State<OTPDialog> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
+              height: MediaQuery.of(context).size.height * PADDING_10,
             ),
             Text(this.widget.description, textAlign: TextAlign.center),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
+              height: MediaQuery.of(context).size.height * PADDING_20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -101,17 +102,18 @@ class _OTPDialogState extends State<OTPDialog> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
+                    height: MediaQuery.of(context).size.height * PADDING_20,
                   ),
                   Container(
                       width: 100,
                       child: ElevatedButton(
-                          onPressed: () {}, child: Text("Verify"))),
+                          onPressed: () {},
+                          child: Text(this.widget.buttonText))),
                 ],
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
+              height: MediaQuery.of(context).size.height * PADDING_20,
             ),
             this.widget.displayResendCodeText
                 ? Text(this.widget.resendCodeText,
