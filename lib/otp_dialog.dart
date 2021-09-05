@@ -131,10 +131,10 @@ class _OTPDialogState extends State<OTPDialog> {
 
   _renderOTPInputFields(int inputFieldsCount) {
     List<Widget> inputFields = [];
-    for (var i = 0; i < inputFieldsCount; i++) {
-      if (i != 0) {
+    for (var index = 0; index < inputFieldsCount; index++) {
+      if (index != 0) {
         inputFields.add(SizedBox(
-          width: MediaQuery.of(context).size.width * 0.04,
+          width: MediaQuery.of(context).size.width * PADDING_20,
         ));
       }
       inputFields.add(OTPInputField(

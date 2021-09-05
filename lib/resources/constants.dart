@@ -6,4 +6,7 @@ const String DEFAULT_BUTTON_LABEL = "Confirmer";
 
 const int DEFAULT_OTP_LENGTH = 5;
 
-final BoxDecoration DEFAULT_INPUT_DECORATION = BoxDecoration(border: Border.all(width: 1, color: Colors.grey));
+final BoxDecoration DEFAULT_INPUT_DECORATION =
+    BoxDecoration(border: Border.all(width: 1, color: Colors.grey));
+
+const int MAX_TEXT_LENGTH = 1;
