@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:otp_dialog/otp_input_field.dart';
 import 'package:otp_dialog/resources/constants.dart';
 import 'package:otp_dialog/resources/dimens.dart';
+import 'package:otp_dialog/resources/extensions.dart';
 
 class OTPDialog extends StatefulWidget {
   final String title;
   final String description;
   final String resendCodeText;
   final String buttonText;
-  final TextStyle titleStyle;
-  final TextStyle descriptionStyle;
-  final TextStyle resendCodeStyle;
+  final TextStyle? titleStyle;
+  final TextStyle? descriptionStyle;
+  final TextStyle? resendCodeStyle;
   final Color buttonColor;
   final int codeLength;
   final bool displayResendCodeText;
@@ -33,10 +34,10 @@ class OTPDialog extends StatefulWidget {
       required this.description,
       this.resendCodeText = RESEND_CODE_DEFAULT_LABEL,
       this.buttonText = DEFAULT_BUTTON_LABEL,
-      this.titleStyle = const TextStyle(fontWeight: FontWeight.bold),
-      this.descriptionStyle = const TextStyle(),
+      this.titleStyle,
+      this.descriptionStyle,
       this.buttonColor = Colors.blue,
-      this.resendCodeStyle = const TextStyle(),
+      this.resendCodeStyle,
       this.codeLength = DEFAULT_OTP_LENGTH,
       this.displayResendCodeText = true,
       this.displayButton = true,
@@ -98,12 +99,20 @@ class _OTPDialogState extends State<OTPDialog> {
           children: [
             Text(
               this.widget.title,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: this.widget.titleStyle == null
+                  ? DEFAULT_TITLE_STYLE
+                      .clone(MediaQuery.of(context).size.width * 0.04)
+                  : this.widget.titleStyle,
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * PADDING_10,
             ),
-            Text(this.widget.description, textAlign: TextAlign.center),
+            Text(this.widget.description,
+                textAlign: TextAlign.center,
+                style: this.widget.descriptionStyle == null
+                    ? DEFAULT_DESCRIPTION_STYLE
+                        .clone(MediaQuery.of(context).size.width * 0.025)
+                    : this.widget.descriptionStyle),
             SizedBox(
               height: MediaQuery.of(context).size.height * PADDING_20,
             ),
@@ -126,9 +135,11 @@ class _OTPDialogState extends State<OTPDialog> {
                       width: this.widget.buttonSize == null
                           ? MediaQuery.of(context).size.width * BUTTON_SIZE
                           : this.widget.buttonSize,
+                      height: MediaQuery.of(context).size.height * BUTTON_HEIGHT,
                       child: ElevatedButton(
                           onPressed: () {},
-                          child: Text(this.widget.buttonText))),
+                          child: Text(this.widget.buttonText, style: DEFAULT_DESCRIPTION_STYLE
+                        .clone(MediaQuery.of(context).size.width * 0.022),))),
                 ],
               ),
             ),
@@ -137,7 +148,10 @@ class _OTPDialogState extends State<OTPDialog> {
             ),
             this.widget.displayResendCodeText
                 ? Text(this.widget.resendCodeText,
-                    style: TextStyle(decoration: TextDecoration.underline))
+                    style: this.widget.descriptionStyle == null
+                        ? DEFAULT_TEXT_STYLE
+                            .clone(MediaQuery.of(context).size.width * 0.025)
+                        : this.widget.descriptionStyle)
                 : Container()
           ],
         ),
